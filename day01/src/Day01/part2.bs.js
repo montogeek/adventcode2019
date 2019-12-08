@@ -2,22 +2,22 @@
 'use strict';
 
 var Fs = require("fs");
-var Day01$Day01 = require("../Day01/Day01.bs.js");
+var Part1$Day01 = require("./part1.bs.js");
 
 function getFuel(fuel) {
   if (fuel <= 0) {
     return 0;
   } else {
-    return fuel + getFuel(Day01$Day01.getTotalFuel(String(fuel))) | 0;
+    return fuel + getFuel(Part1$Day01.getTotalFuel(String(fuel))) | 0;
   }
 }
 
 function main(input) {
-  var moduleFuels = Day01$Day01.calculateFuel(Day01$Day01.toIntegers(Day01$Day01.splitLines(input)));
-  return Day01$Day01.calTotalfuel(moduleFuels.map(getFuel));
+  var moduleFuels = Part1$Day01.calculateFuel(Part1$Day01.toIntegers(Part1$Day01.splitLines(input)));
+  return Part1$Day01.calTotalfuel(moduleFuels.map(getFuel));
 }
 
-var Day02 = {
+var Part2 = {
   getFuel: getFuel,
   main: main
 };
@@ -26,6 +26,6 @@ var file = Fs.readFileSync("./input.txt", "utf8");
 
 console.log(main(file));
 
-exports.Day02 = Day02;
+exports.Part2 = Part2;
 exports.file = file;
 /* file Not a pure module */
