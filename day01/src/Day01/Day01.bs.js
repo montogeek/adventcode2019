@@ -37,15 +37,45 @@ function getTotalFuel(input) {
   return calTotalfuel(calculateFuel(strings.map(Caml_format.caml_int_of_string)));
 }
 
+var Part1 = {
+  splitLines: splitLines,
+  toIntegers: toIntegers,
+  calculateFuel: calculateFuel,
+  calculateTotalFuel: calculateTotalFuel,
+  calTotalfuel: calTotalfuel,
+  getTotalFuel: getTotalFuel
+};
+
+function getFuel(fuel) {
+  if (fuel <= 0) {
+    return 0;
+  } else {
+    return fuel + getFuel(getTotalFuel(String(fuel))) | 0;
+  }
+}
+
+function main(input) {
+  var strings = input.split("\n");
+  var moduleFuels = calculateFuel(strings.map(Caml_format.caml_int_of_string));
+  return calTotalfuel(moduleFuels.map(getFuel));
+}
+
+var Part2 = {
+  getFuel: getFuel,
+  main: main
+};
+
+var Day01 = {
+  Part1: Part1,
+  Part2: Part2
+};
+
 var file = Fs.readFileSync("./input.txt", "utf8");
 
 getTotalFuel(file);
 
-exports.splitLines = splitLines;
-exports.toIntegers = toIntegers;
-exports.calculateFuel = calculateFuel;
-exports.calculateTotalFuel = calculateTotalFuel;
-exports.calTotalfuel = calTotalfuel;
-exports.getTotalFuel = getTotalFuel;
+main(file);
+
+exports.Day01 = Day01;
 exports.file = file;
 /* file Not a pure module */
