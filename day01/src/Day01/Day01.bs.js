@@ -2,6 +2,7 @@
 'use strict';
 
 var Fs = require("fs");
+var $$Array = require("bs-platform/lib/js/array.js");
 var Js_math = require("bs-platform/lib/js/js_math.js");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
 
@@ -25,17 +26,26 @@ function calculateTotalFuel(fuels) {
               }), 0);
 }
 
-function main(param) {
-  var file = Fs.readFileSync("./input.txt", "utf8");
-  var strings = file.split("\n");
-  return calculateTotalFuel(calculateFuel(strings.map(Caml_format.caml_int_of_string)));
+function calTotalfuel(fuels) {
+  return $$Array.fold_left((function (a, b) {
+                return a + b | 0;
+              }), 0, fuels);
 }
 
-main(/* () */0);
+function getTotalFuel(input) {
+  var strings = input.split("\n");
+  return calTotalfuel(calculateFuel(strings.map(Caml_format.caml_int_of_string)));
+}
+
+var file = Fs.readFileSync("./input.txt", "utf8");
+
+getTotalFuel(file);
 
 exports.splitLines = splitLines;
 exports.toIntegers = toIntegers;
 exports.calculateFuel = calculateFuel;
 exports.calculateTotalFuel = calculateTotalFuel;
-exports.main = main;
-/*  Not a pure module */
+exports.calTotalfuel = calTotalfuel;
+exports.getTotalFuel = getTotalFuel;
+exports.file = file;
+/* file Not a pure module */
